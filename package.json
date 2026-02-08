@@ -1,0 +1,48 @@
+{
+  "name": "sun-stop-timer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "bin": "server-bundled.cjs",
+  "pkg": {
+    "targets": [
+      "node18-win-x64"
+    ],
+    "assets": [
+      "dist/**/*"
+    ],
+    "outputPath": "build"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "package": "npm run build && npx esbuild server.js --bundle --platform=node --target=node18 --outfile=server-bundled.cjs --format=cjs --packages=external && pkg .",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "open": "^11.0.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "pe-library": "^2.0.1",
+    "pkg": "^5.8.1",
+    "rcedit": "^5.0.2",
+    "resedit": "^3.0.1",
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.2.0"
+  }
+}
