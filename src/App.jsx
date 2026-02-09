@@ -245,7 +245,7 @@ function App() {
             )}
 
             {/* Download progress toast - bottom right, non-blocking */}
-            {tunnelLoading && downloadProgress && (
+            {downloadProgress && (
                 <div style={{
                     position: 'fixed',
                     bottom: '1.5rem',
@@ -254,11 +254,11 @@ function App() {
                     border: '1px solid rgba(255,255,255,0.15)',
                     borderRadius: '10px',
                     padding: '0.75rem 1rem',
-                    width: '260px',
+                    width: '280px',
                     zIndex: 2000,
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.6)'
                 }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>
                         Scaricamento tunnel...
                     </div>
                     <div style={{
@@ -269,20 +269,31 @@ function App() {
                         overflow: 'hidden',
                         marginBottom: '0.4rem'
                     }}>
-                        <div style={{
-                            height: '100%',
-                            background: 'var(--accent-color)',
-                            borderRadius: '3px',
-                            transition: 'width 0.3s ease',
-                            width: downloadProgress.total > 0
-                                ? `${Math.round((downloadProgress.downloaded / downloadProgress.total) * 100)}%`
-                                : '0%'
-                        }} />
+                        {downloadProgress.total > 0 ? (
+                            <div style={{
+                                height: '100%',
+                                background: 'var(--accent-color)',
+                                borderRadius: '3px',
+                                transition: 'width 0.3s ease',
+                                width: `${Math.round((downloadProgress.downloaded / downloadProgress.total) * 100)}%`
+                            }} />
+                        ) : (
+                            <div style={{
+                                height: '100%',
+                                background: 'var(--accent-color)',
+                                borderRadius: '3px',
+                                width: '40%',
+                                animation: 'indeterminate 1.5s ease-in-out infinite'
+                            }} />
+                        )}
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                         {downloadProgress.total > 0
                             ? `${(downloadProgress.downloaded / 1048576).toFixed(1)} / ${(downloadProgress.total / 1048576).toFixed(1)} MB (${Math.round((downloadProgress.downloaded / downloadProgress.total) * 100)}%)`
-                            : 'Avvio download...'}
+                            : 'Download in corso...'}
+                    </div>
+                    <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', marginTop: '0.3rem', opacity: 0.5 }}>
+                        Solo la prima volta
                     </div>
                 </div>
             )}

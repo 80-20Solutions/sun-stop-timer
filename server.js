@@ -109,7 +109,7 @@ const tick = () => {
     if (state.status !== 'RUNNING') return;
 
     const now = Date.now();
-    const elapsed = Math.round((now - state.lastTick) / 1000);
+    const elapsed = Math.floor((now - state.lastTick) / 1000);
 
     if (elapsed >= 1) {
         state.timeLeft -= elapsed;
